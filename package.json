@@ -4,7 +4,8 @@
   "description": "A blog application for tech related contents ",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/ukonulucky/smartTekBlog/issues"
   },
-  "homepage": "https://github.com/ukonulucky/smartTekBlog#readme"
+  "homepage": "https://github.com/ukonulucky/smartTekBlog#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.1",
+    "nodemon": "^3.0.3"
+  }
 }

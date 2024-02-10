@@ -1,0 +1,73 @@
+const mongoose = require('mongoose');
+
+
+
+const postSchema = new mongoose.Schema({
+    img: {
+        type: Object,
+        required: true
+    },
+    
+    description: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        require: true
+    },
+    nextEarningData: {
+        type:Date,
+        default:() => new Date( new Data.getFullYear(), new Data.getMonth() +1 , 1),// default to the first day of the next month
+    },
+    thisMontEarning: {
+        type:Number, 
+        default: 0
+    },
+    totalEarning: {
+        type:Number,
+        default: 0
+    },
+    Category: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Category"
+    },
+    viewCount: {
+        type:Number,
+    dafault:0
+    },
+
+    // interactions
+    likes: [{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }],
+
+    dislikes:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }],
+    viewers:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }],
+
+    //comments
+ comments:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    }],
+ isBlocked:{
+        type:Bolean,
+        default:false
+    },
+
+})
+
+
+const PostModel = mongoose.model("Post",postSchema)
+
+module.exports = PostModel
