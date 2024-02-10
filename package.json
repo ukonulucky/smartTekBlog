@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A blog application for tech related contents ",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ukonulucky/smartTekBlog.git"
+  },
+  "keywords": [
+    "blog",
+    "smartTek",
+    "Node.js",
+    "React",
+    "Redux"
+  ],
+  "author": "ukonulucky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ukonulucky/smartTekBlog/issues"
+  },
+  "homepage": "https://github.com/ukonulucky/smartTekBlog#readme"
+}
