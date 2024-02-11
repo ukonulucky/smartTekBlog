@@ -1,27 +1,31 @@
 const mongoose = require('mongoose');
 
 
-
+const currentData = new Date()
 const postSchema = new mongoose.Schema({
-    img: {
-        type: Object,
-        required: true
+    title: {
+        type:String,
+        required: true,
+        trim:true
     },
-    
     description: {
         type: String,
         trim: true,
         required: true
     },
+    // img: {
+    //     type: Object,
+    //     required: true
+    // },
+    // author: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref:"User",
+    //     require: true
+    // },
+    nextEarningDate: {
     
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        require: true
-    },
-    nextEarningData: {
         type:Date,
-        default:() => new Date( new Data.getFullYear(), new Data.getMonth() +1 , 1),// default to the first day of the next month
+        default:() => new Date(currentData.getFullYear(), currentData.getMonth() +1 , 1),// default to the first day of the next month
     },
     thisMontEarning: {
         type:Number, 
@@ -61,7 +65,7 @@ const postSchema = new mongoose.Schema({
         ref:"User"
     }],
  isBlocked:{
-        type:Bolean,
+        type:Boolean,
         default:false
     },
 
