@@ -3,11 +3,6 @@ const mongoose = require('mongoose');
 
 const currentData = new Date()
 const postSchema = new mongoose.Schema({
-    title: {
-        type:String,
-        required: true,
-        trim:true
-    },
     description: {
         type: String,
         trim: true,
@@ -69,7 +64,7 @@ const postSchema = new mongoose.Schema({
         default:false
     },
 
-})
+}, {timestamps : true})
 
 
 const PostModel = mongoose.model("Post",postSchema)

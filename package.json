@@ -25,9 +25,13 @@
   },
   "homepage": "https://github.com/ukonulucky/smartTekBlog#readme",
   "dependencies": {
+    "cloudinary": "^2.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mongoose": "^8.1.1"
+    "express-async-handler": "^1.2.0",
+    "mongoose": "^8.1.1",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0"
   },
   "devDependencies": {
     "dotenv": "^16.4.1",
