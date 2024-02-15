@@ -16,24 +16,24 @@ const upload = multer({storage: storage})
 
 
 // creating post
-postRouter.post("/api/v1/posts/create",upload.single("postImage"),createPostController)
+postRouter.post("/create",upload.single("postImage"),createPostController)
 
 
 // geting all post 
-postRouter.get("/api/v1/posts",getAllPostController )
+postRouter.get("",getAllPostController )
 
 // get a sing post
-postRouter.get("/api/v1/posts/:postId", getSinglePostController)
+postRouter.get("/:postId", getSinglePostController)
 
 
 //update a post
 
-postRouter.put("/api/v1/posts/:postId", updatePostController)
+postRouter.put("/:postId", updatePostController)
 
 
 // delete post 
 
-postRouter.delete("/api/v1/posts/:postId", deleteSinglePostController)
+postRouter.delete("/:postId", deleteSinglePostController)
 
 
 

@@ -10,6 +10,9 @@ const cors = require('cors')
 // form my application
 const dbConnetFunc = require('./config/db/dbConnect');
 const postRouter = require("./route/post/postRoute");
+const { userRegisterController } = require("./controller/user/userController");
+const passportConfig = require("./utils/passport-config");
+const userRouter = require("./route/user/userRoute");
 
 // form my application
 
@@ -30,8 +33,14 @@ const corsOptions = {
 app.use(express.json())
 app.use(cors(corsOptions))
 
+// Passport middleware
 
-app.use("/",postRouter)
+app.use(passportConfig.initialize())
+
+
+// Routes
+app.use("/api/v1/posts",postRouter)
+app.use("/api/v1/user",userRouter)
 
 app.use((req, res, next) => {
     res.status(404).json({

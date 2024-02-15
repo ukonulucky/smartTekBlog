@@ -5,15 +5,15 @@ const PostModel = require("../../model/Post/Post")
 
 // create post controller
 const createPostController =  expressAsyncHandler(async (req, res, next) => { 
-    console.log(req.file)
+    console.log(req.body)
     const {description} = req.body
     console.log(description)
-      if(!description){
-  throw new Error("Post description must be provided")
+      if(!description || !req.file){
+           throw new Error("Post description and image must be provided")
       }
 
     
-    const createdPost = await PostModel.create(req.body)
+    const createdPost = await PostModel.create({description, img: req.file})
         return res.json({
            status:"success",
            message:"Post created successfull",

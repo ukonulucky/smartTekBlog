@@ -8,10 +8,10 @@ const postSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    // img: {
-    //     type: Object,
-    //     required: true
-    // },
+    img: {
+        type: Object,
+        required: true
+    },
     // author: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref:"User",
