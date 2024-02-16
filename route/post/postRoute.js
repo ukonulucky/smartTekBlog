@@ -20,7 +20,7 @@ postRouter.post("/create",upload.single("postImage"),createPostController)
 
 
 // geting all post 
-postRouter.get("",getAllPostController )
+postRouter.get("/",getAllPostController )
 
 // get a sing post
 postRouter.get("/:postId", getSinglePostController)
