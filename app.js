@@ -2,12 +2,13 @@
 require("dotenv").config()
 const express = require('express');
 const cors = require('cors')
+const cookieParser = require("cookie-parser")
 
 
 // third party libraries
 
 
-// form my application
+// from my application
 const dbConnetFunc = require('./config/db/dbConnect');
 const postRouter = require("./route/post/postRoute");
 const { userRegisterController } = require("./controller/user/userController");
@@ -30,8 +31,10 @@ const corsOptions = {
 
 //Middleware
 
+app.use(cookieParser())
 app.use(express.json())
 app.use(cors(corsOptions))
+
 
 // Passport middleware
 

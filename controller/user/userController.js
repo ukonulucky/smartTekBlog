@@ -3,6 +3,10 @@ const UserModel = require("../../model/User/User");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const jwt =require("jsonwebtoken");
+const isValidObjectId = require("../../utils/MongooseIdValidity");
+
+
+
 
 
 
@@ -108,4 +112,85 @@ const token =  jwt.sign({id : user?._id}, process.env.JWT_SECRET, {
 })
 
 
-module.exports = { userRegisterController, userLoginController, userGoogleAuthController, userGoogleAuthCallback};
+const userAuthticateController = expressAsyncHandler(async(req, res) => {
+  try {
+// console.log(req)
+    const  {token} = req.cookies
+    if(!token){
+    return res.status(200).json({
+      isAuthenticated: false
+    })
+    }
+    const {id}  = jwt.verify(token, process.env.JWT_SECRET)
+    const foundUser = await UserModel.findById(id)
+    if (!foundUser) {
+      return res.status(401).json({
+        isAuthenticated: false
+      })
+    }
+    return res.status(200).json({
+      isAuthenticated: true,
+      userName: foundUser.userName, 
+      id:foundUser._id
+    })
+    
+  } catch (error) {
+    return res.status(401).json({
+      isAuthenticated: false
+    })
+  }
+
+
+})
+
+const getAllUsersController= expressAsyncHandler(async(req,res) => {
+  try {
+    console.log("ran")
+    const users = await UserModel.find()
+    return res.status(201).json({
+      status:"success",
+      users
+    })
+    
+  } catch (error) {
+    throw new Error(error) 
+  }
+})
+const getSingleUserController = expressAsyncHandler(async(req, res) => {
+const { id }= req.params
+const isIdVallid = isValidObjectId(id)
+console.log(isIdVallid)
+ if(!id || !isIdVallid){
+  return res.status(404).json({
+    status:"false",
+    message:"User not found"
+   })
+ }
+
+
+ 
+ const userFound = await UserModel.findById(id)
+ console.log(userFound)
+ if(!userFound){
+     return res.status(404).json({
+      status:"false",
+      message:"User not found"
+     })
+ }
+
+ return res.status(200).json({
+  status:"success", 
+  user: userFound
+ })
+})
+
+const logOutUserController=  expressAsyncHandler(async(req, res) => {
+         res.cookie("token", "", {
+          maxAge: 1
+         })
+         return res.status(200).json({
+          isAuthenticated: false
+         })
+})
+
+module.exports = { userRegisterController, userLoginController, userGoogleAuthController, userGoogleAuthCallback, userAuthticateController, getAllUsersController, getSingleUserController, logOutUserController};
